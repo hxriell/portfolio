@@ -6,7 +6,27 @@ import { getCollection } from 'astro:content';
 import { withBase } from '../lib/base.js';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.ordre - b.data.ordre);
+const featuredProject = projects[0];
+const otherProjects = projects.slice(1);
 const base = withBase();
+
+const labTeasers = [
+  {
+    icon: 'fa-code',
+    title: 'Éditeur de code en direct',
+    proof: 'Rendu HTML/CSS en temps réel dans le navigateur.',
+  },
+  {
+    icon: 'fa-network-wired',
+    title: 'Réseau neuronal',
+    proof: 'Visualisation de la propagation du signal entre couches.',
+  },
+  {
+    icon: 'fa-lock',
+    title: 'Cryptographie',
+    proof: 'Chiffrement interactif avec algorithmes classiques.',
+  },
+];
 ---
 
 <Layout>
@@ -90,17 +110,17 @@ const base = withBase();
           </div>
           <div class="about-domains">
             <div class="domain-card">
-              <i class="fa-solid fa-flask" aria-hidden="true"></i>
+              <div class="icon-tile" aria-hidden="true"><i class="fa-solid fa-flask"></i></div>
               <h3>Science &amp; Data</h3>
               <p>Python, R, analyse de données, physique appliquée.</p>
             </div>
             <div class="domain-card">
-              <i class="fa-solid fa-code" aria-hidden="true"></i>
+              <div class="icon-tile" aria-hidden="true"><i class="fa-solid fa-code"></i></div>
               <h3>Tech &amp; Développement</h3>
               <p>Web full-stack, WordPress, Unreal Engine, cybersécurité.</p>
             </div>
             <div class="domain-card">
-              <i class="fa-solid fa-pen-nib" aria-hidden="true"></i>
+              <div class="icon-tile" aria-hidden="true"><i class="fa-solid fa-pen-nib"></i></div>
               <h3>Art &amp; Design</h3>
               <p>UI/UX sur Figma, Adobe CC (Ps, Ai, Ae, Pr), identité visuelle.</p>
             </div>
@@ -121,7 +141,7 @@ const base = withBase();
         </div>
         <div class="services-grid">
           <article class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i></div>
+            <div class="service-icon icon-tile" aria-hidden="true"><i class="fa-solid fa-laptop-code"></i></div>
             <h3>Développement Web</h3>
             <p>
               Sites vitrines, plateformes multiservices et boutiques en ligne. Intégration soignée, chargement
@@ -137,7 +157,7 @@ const base = withBase();
             </a>
           </article>
           <article class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-pen-ruler" aria-hidden="true"></i></div>
+            <div class="service-icon icon-tile" aria-hidden="true"><i class="fa-solid fa-pen-ruler"></i></div>
             <h3>Design UX/UI</h3>
             <p>
               Des interfaces claires, pensées pour vos utilisateurs avant d'être jolies. Maquettes, système de
@@ -153,7 +173,7 @@ const base = withBase();
             </a>
           </article>
           <article class="service-card">
-            <div class="service-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+            <div class="service-icon icon-tile" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></div>
             <h3>Data &amp; IA</h3>
             <p>
               Donner du sens à vos chiffres : nettoyage, analyse et visualisation. Prototypes d'algorithmes et
@@ -183,8 +203,45 @@ const base = withBase();
           <h2 class="section-title">Des projets en ligne, pas des maquettes.</h2>
           <p class="section-intro">Quatre projets, quatre rôles différents — et ce qu'ils ont changé concrètement.</p>
         </div>
+        {
+          featuredProject && (
+            <div class="projects-featured">
+              <ProjectCard project={featuredProject} base={base} featured />
+            </div>
+          )
+        }
         <div class="projects-grid">
-          {projects.map((project) => <ProjectCard project={project} base={base} />)}
+          {otherProjects.map((project) => <ProjectCard project={project} base={base} />)}
+        </div>
+      </div>
+    </section>
+
+    <section id="lab-teaser" class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow">04 — Laboratoire</p>
+          <h2 class="section-title">Quinze modules jouables pour vérifier mes compétences.</h2>
+          <p class="section-intro">
+            Pas de déclarations vides : testez des démos codées from scratch — Web, Data/IA, Design et Sécurité.
+          </p>
+        </div>
+        <div class="lab-teaser-grid">
+          {
+            labTeasers.map((item) => (
+              <article class="lab-teaser-card">
+                <div class="icon-tile" aria-hidden="true">
+                  <i class={`fa-solid ${item.icon}`} />
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.proof}</p>
+              </article>
+            ))
+          }
+        </div>
+        <div class="lab-teaser-cta">
+          <a href={withBase('lab')} class="btn primary">
+            Explorer le laboratoire <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
         </div>
       </div>
     </section>
@@ -202,7 +259,7 @@ const base = withBase();
               <i class="fa-solid fa-certificate" aria-hidden="true"></i> Certifications
             </h3>
             <div class="edu-card highlight-card">
-              <div class="edu-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
+              <div class="edu-icon icon-tile" aria-hidden="true"><i class="fa-solid fa-brain"></i></div>
               <div class="edu-content">
                 <h4>Elements of AI</h4>
                 <span class="edu-org">University of Helsinki &amp; Reaktor</span>
@@ -221,7 +278,7 @@ const base = withBase();
               </div>
             </div>
             <div class="edu-card">
-              <div class="edu-icon"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i></div>
+              <div class="edu-icon icon-tile" aria-hidden="true"><i class="fa-solid fa-laptop-code"></i></div>
               <div class="edu-content">
                 <h4>Parcours Tech</h4>
                 <span class="edu-org">OpenClassrooms (en cours)</span>

@@ -60,7 +60,7 @@ function spy() {
   else if (onProject) current = 'projects';
   else if (hash) current = hash;
   else {
-    const sections = document.querySelectorAll('#home, #about, #services, #projects, #education, #contact');
+    const sections = document.querySelectorAll('#home, #about, #services, #projects, #lab-teaser, #education, #contact');
     const nearBottom =
       window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
     current = nearBottom ? 'contact' : 'home';

@@ -1,20 +1,37 @@
 ---
-const { project, base } = Astro.props;
+const { project, base, featured = false } = Astro.props;
 const href = `${base}projects/${project.id}`;
+const tags = project.data.tags.slice(0, 4);
+const extraTags = project.data.tags.length - tags.length;
 ---
 
-<article class="project-card">
+<article class:list={['project-card', { 'project-card--featured': featured }]}>
   <div class="card-content">
     <div class="badge">{project.data.badge}</div>
     <h3>{project.data.titre}</h3>
-    <p class="project-role"><strong>Mon rôle :</strong> {project.data.role}</p>
-    <p>{project.data.description}</p>
-    <p class="project-impact"><strong>Impact :</strong> {project.data.impact}</p>
+    <p class="project-impact">{project.data.impact}</p>
+    <p class="project-role"><span class="role-label">Mon rôle :</span> {project.data.role}</p>
+    <p class="project-description">{project.data.description}</p>
     <div class="tags">
-      {project.data.tags.map((tag) => <span>{tag}</span>)}
+      {tags.map((tag) => <span>{tag}</span>)}
+      {extraTags > 0 && <span class="tag-more">+{extraTags}</span>}
     </div>
-    <a href={href} class="project-link">
-      Lire le case study <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-    </a>
+    <div class="project-actions">
+      <a href={href} class="project-link">
+        Lire le case study <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </a>
+      {
+        featured && project.data.url && (
+          <a
+            href={project.data.url}
+            class="project-live"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Voir le site live <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i>
+          </a>
+        )
+      }
+    </div>
   </div>
 </article>

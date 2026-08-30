@@ -22,9 +22,11 @@ const data = project.data;
       <p class="section-eyebrow">Réalisation</p>
       <p class="badge" style="margin-bottom: 16px;">{data.badge}</p>
       <h1 class="section-title">{data.titre}</h1>
-      <p class="section-intro">{data.description}</p>
+      {data.impact && (
+        <p class="project-impact project-impact--lead"><strong>Impact :</strong> {data.impact}</p>
+      )}
       <p class="project-role"><strong>Mon rôle :</strong> {data.role}</p>
-      <p class="project-impact"><strong>Impact :</strong> {data.impact}</p>
+      <p class="section-intro">{data.description}</p>
       <div class="tags" style="margin: 24px 0;">
         {data.tags.map((tag) => <span>{tag}</span>)}
       </div>
