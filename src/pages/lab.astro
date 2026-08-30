@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LabGrid from '../components/LabGrid.astro';
+import LabRoot from '../components/LabRoot.astro';
+---
+
+<Layout
+  title="Laboratoire | TEKO Folly Hariel Marcel"
+  description="Quinze modules interactifs codés à la main : web, data, design et sécurité."
+>
+  <main id="main" tabindex="-1">
+    <section id="lab" class="section dark-bg" style="padding-top: calc(var(--nav-height) + 48px);">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow">04 — Laboratoire</p>
+          <h2 class="section-title">Quinze modules, codés à la main.</h2>
+          <p class="section-intro">
+            Manipulez-les directement dans le navigateur : chacun démontre une compétence précise, sans
+            framework UI.
+          </p>
+        </div>
+        <LabGrid />
+      </div>
+    </section>
+  </main>
+  <LabRoot />
+</Layout>

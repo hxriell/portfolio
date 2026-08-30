@@ -1,0 +1,20 @@
+---
+const { project, base } = Astro.props;
+const href = `${base}projects/${project.id}`;
+---
+
+<article class="project-card">
+  <div class="card-content">
+    <div class="badge">{project.data.badge}</div>
+    <h3>{project.data.titre}</h3>
+    <p class="project-role"><strong>Mon rôle :</strong> {project.data.role}</p>
+    <p>{project.data.description}</p>
+    <p class="project-impact"><strong>Impact :</strong> {project.data.impact}</p>
+    <div class="tags">
+      {project.data.tags.map((tag) => <span>{tag}</span>)}
+    </div>
+    <a href={href} class="project-link">
+      Lire le case study <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</article>

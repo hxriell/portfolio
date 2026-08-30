@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { withBase } from '../../lib/base.js';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const data = project.data;
+---
+
+<Layout title={`${data.titre} | TEKO Folly Hariel Marcel`} description={data.description}>
+  <main id="main" tabindex="-1" class="section">
+    <article class="container" style="max-width: 46rem; padding-top: calc(var(--nav-height) + 32px);">
+      <p class="section-eyebrow">Réalisation</p>
+      <p class="badge" style="margin-bottom: 16px;">{data.badge}</p>
+      <h1 class="section-title">{data.titre}</h1>
+      <p class="section-intro">{data.description}</p>
+      <p class="project-role"><strong>Mon rôle :</strong> {data.role}</p>
+      <p class="project-impact"><strong>Impact :</strong> {data.impact}</p>
+      <div class="tags" style="margin: 24px 0;">
+        {data.tags.map((tag) => <span>{tag}</span>)}
+      </div>
+      <Content />
+      {
+        data.url ? (
+          <p>
+            <a href={data.url} class="btn primary" target="_blank" rel="noopener noreferrer">
+              Voir le site
+            </a>
+          </p>
+        ) : (
+          <p class="project-info">Démonstration disponible sur demande</p>
+        )
+      }
+      <p style="margin-top: 40px;">
+        <a href={withBase('#projects')} class="project-link">← Toutes les réalisations</a>
+      </p>
+    </article>
+  </main>
+</Layout>

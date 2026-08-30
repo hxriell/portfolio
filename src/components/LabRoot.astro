@@ -1,0 +1,6 @@
+<script>
+  import { mountLab, unmountLab } from '../lab/index.js';
+
+  document.addEventListener('astro:page-load', mountLab);
+  document.addEventListener('astro:before-swap', unmountLab);
+</script>

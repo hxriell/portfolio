@@ -1,0 +1,260 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CircuitCanvas from '../components/CircuitCanvas.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { withBase } from '../lib/base.js';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.ordre - b.data.ordre);
+const base = withBase();
+---
+
+<Layout>
+  <CircuitCanvas />
+  <main id="main" tabindex="-1">
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <p class="subtitle animate-text">Disponible pour de nouveaux projets — Lomé &amp; à distance</p>
+        <h1 class="animate-text delay-1">TEKO Folly Hariel Marcel</h1>
+        <h2 class="animate-text delay-2">
+          Je transforme vos idées en <span class="highlight">produits numériques</span> qui fonctionnent.
+        </h2>
+        <p class="description animate-text delay-3">
+          Développeur web et designer d'interfaces basé à Lomé. J'accompagne mes clients de la première maquette
+          jusqu'à la mise en ligne, avec un souci constant de la <strong>clarté</strong>, de la
+          <strong>performance</strong> et du <strong>détail</strong>.
+        </p>
+        <ul class="hero-proofs animate-text delay-3">
+          <li>
+            <span class="proof-number">2+</span>
+            <span class="proof-label">années de pratique du web</span>
+          </li>
+          <li>
+            <span class="proof-number">5+</span>
+            <span class="proof-label">projets livrés et en ligne</span>
+          </li>
+          <li>
+            <span class="proof-number">15</span>
+            <span class="proof-label">modules interactifs codés</span>
+          </li>
+        </ul>
+        <div class="cta-group animate-text delay-4">
+          <a href={withBase('#projects')} class="btn primary">Voir mes réalisations</a>
+          <a href={withBase('#contact')} class="btn secondary">Me contacter</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="atom-container">
+          <div class="electron e1"></div>
+          <div class="electron e2"></div>
+          <div class="electron e3"></div>
+          <div class="nucleus"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section glass-panel">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow">01 — Profil</p>
+          <h2 class="section-title">Analyse scientifique, exécution produit.</h2>
+          <p class="section-intro">Un parcours scientifique, une pratique quotidienne du code et du design.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              Formé aux sciences et autodidacte en informatique, je travaille à l'intersection de
+              l'<strong>analyse</strong> (physique, données) et de la <strong>création</strong> (web, design).
+              Ma méthode est simple : comprendre le besoin réel, prototyper vite, puis livrer une solution
+              soignée et maintenable.
+            </p>
+            <p>
+              J'apprends par la pratique. Chaque compétence affichée ici correspond à un projet réel ou à un
+              module que j'ai codé moi-même — vous pouvez en tester une bonne partie dans le
+              <a href={withBase('lab')}>laboratoire</a>.
+            </p>
+            <ul class="stats-list">
+              <li>
+                <span class="stat-number">2+</span>
+                <span class="stat-label">Années d'expérience web</span>
+              </li>
+              <li>
+                <span class="stat-number">5+</span>
+                <span class="stat-label">Projets majeurs</span>
+              </li>
+              <li>
+                <span class="stat-number">∞</span>
+                <span class="stat-label">Curiosité technique</span>
+              </li>
+            </ul>
+          </div>
+          <div class="about-domains">
+            <div class="domain-card">
+              <i class="fa-solid fa-flask" aria-hidden="true"></i>
+              <h3>Science &amp; Data</h3>
+              <p>Python, R, analyse de données, physique appliquée.</p>
+            </div>
+            <div class="domain-card">
+              <i class="fa-solid fa-code" aria-hidden="true"></i>
+              <h3>Tech &amp; Développement</h3>
+              <p>Web full-stack, WordPress, Unreal Engine, cybersécurité.</p>
+            </div>
+            <div class="domain-card">
+              <i class="fa-solid fa-pen-nib" aria-hidden="true"></i>
+              <h3>Art &amp; Design</h3>
+              <p>UI/UX sur Figma, Adobe CC (Ps, Ai, Ae, Pr), identité visuelle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow">02 — Services</p>
+          <h2 class="section-title">Trois façons de travailler ensemble.</h2>
+          <p class="section-intro">
+            Du site vitrine au tableau de bord de données, avec le même niveau d'exigence sur la clarté et la
+            performance.
+          </p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i></div>
+            <h3>Développement Web</h3>
+            <p>
+              Sites vitrines, plateformes multiservices et boutiques en ligne. Intégration soignée, chargement
+              rapide, affichage impeccable sur mobile.
+            </p>
+            <ul class="service-list">
+              <li>Site vitrine ou institutionnel</li>
+              <li>E-commerce &amp; WordPress</li>
+              <li>Optimisation performance &amp; référencement technique</li>
+            </ul>
+            <a href={withBase('#contact')} class="service-link">
+              Parler de mon site <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+          <article class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-pen-ruler" aria-hidden="true"></i></div>
+            <h3>Design UX/UI</h3>
+            <p>
+              Des interfaces claires, pensées pour vos utilisateurs avant d'être jolies. Maquettes, système de
+              composants et identité visuelle cohérente.
+            </p>
+            <ul class="service-list">
+              <li>Maquettes Figma &amp; prototypes cliquables</li>
+              <li>Design system &amp; charte graphique</li>
+              <li>Refonte et amélioration d'un parcours existant</li>
+            </ul>
+            <a href={withBase('#contact')} class="service-link">
+              Repenser mon interface <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+          <article class="service-card">
+            <div class="service-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+            <h3>Data &amp; IA</h3>
+            <p>
+              Donner du sens à vos chiffres : nettoyage, analyse et visualisation. Prototypes d'algorithmes et
+              démonstrations d'intelligence artificielle.
+            </p>
+            <ul class="service-list">
+              <li>Analyse et nettoyage de données (Python, R)</li>
+              <li>Tableaux de bord &amp; visualisations</li>
+              <li>Prototypes IA et automatisations</li>
+            </ul>
+            <a href={withBase('#contact')} class="service-link">
+              Exploiter mes données <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+        </div>
+        <div class="services-cta">
+          <p>Un besoin précis ou une idée encore floue ? Les deux se travaillent.</p>
+          <a href="mailto:marceltko@gmail.com?subject=Projet%20web" class="btn primary">Discutons de votre projet</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section glass-panel">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow">03 — Réalisations</p>
+          <h2 class="section-title">Des projets en ligne, pas des maquettes.</h2>
+          <p class="section-intro">Quatre projets, quatre rôles différents — et ce qu'ils ont changé concrètement.</p>
+        </div>
+        <div class="projects-grid">
+          {projects.map((project) => <ProjectCard project={project} base={base} />)}
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="section-eyebrow">05 — Formation</p>
+          <h2 class="section-title">Un socle académique, une pratique continue.</h2>
+          <p class="section-intro">Un parcours scientifique complété par une formation en ligne permanente.</p>
+        </div>
+        <div class="education-grid">
+          <div class="edu-column">
+            <h3 class="column-title">
+              <i class="fa-solid fa-certificate" aria-hidden="true"></i> Certifications
+            </h3>
+            <div class="edu-card highlight-card">
+              <div class="edu-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
+              <div class="edu-content">
+                <h4>Elements of AI</h4>
+                <span class="edu-org">University of Helsinki &amp; Reaktor</span>
+                <p>
+                  Introduction approfondie à l'intelligence artificielle : apprentissage automatique et réseaux de
+                  neurones.
+                </p>
+                <a
+                  href="https://certificates.mooc.fi/validate/83rk9c0c21a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="cert-link"
+                >
+                  Voir le certificat <i class="fa-solid fa-external-link-alt" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <div class="edu-card">
+              <div class="edu-icon"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i></div>
+              <div class="edu-content">
+                <h4>Parcours Tech</h4>
+                <span class="edu-org">OpenClassrooms (en cours)</span>
+                <p>Design UX/UI, data science (Python/R) et cybersécurité.</p>
+              </div>
+            </div>
+          </div>
+          <div class="edu-column">
+            <h3 class="column-title">
+              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Parcours scolaire
+            </h3>
+            <div class="edu-card">
+              <div class="edu-date">Juillet 2024</div>
+              <div class="edu-content">
+                <h4>Baccalauréat scientifique (série D)</h4>
+                <span class="edu-org">Collège Protestant Lomé-Tokoin</span>
+                <p>Spécialité mathématiques, physique et sciences de la vie.</p>
+              </div>
+            </div>
+            <div class="edu-card">
+              <div class="edu-date">2024 – aujourd'hui</div>
+              <div class="edu-content">
+                <h4>Auto-formation continue</h4>
+                <span class="edu-org">MOOCs &amp; projets personnels</span>
+                <p>
+                  Apprentissage intensif par la pratique : développement web, moteurs de jeux (Unreal) et création
+                  numérique.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

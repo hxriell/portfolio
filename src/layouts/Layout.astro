@@ -1,0 +1,103 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import { withBase } from '../lib/base.js';
+
+const { title = 'TEKO Folly Hariel Marcel | Développeur Web, Design & Data', description = "Développeur web, designer UX/UI et passionné de data à Lomé. Je conçois des sites, des interfaces et des outils interactifs, du prototype à la mise en ligne." } = Astro.props;
+const home = withBase();
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="TEKO Folly Hariel Marcel" />
+    <meta name="theme-color" content="#06070a" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hxriell.github.io/portfolio" />
+    <meta property="og:locale" content="fr_FR" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <ClientRouter />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu</a>
+    <nav class="navbar">
+      <a href={home} class="logo">H.TEKO <span class="dot">.</span></a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href={home} data-nav="home">Accueil</a></li>
+        <li><a href={withBase('#about')} data-nav="about">Profil</a></li>
+        <li><a href={withBase('#services')} data-nav="services">Services</a></li>
+        <li><a href={withBase('#projects')} data-nav="projects">Réalisations</a></li>
+        <li><a href={withBase('lab')} data-nav="lab">Laboratoire</a></li>
+        <li><a href={withBase('#education')} data-nav="education">Formation</a></li>
+        <li><a href={withBase('#contact')} data-nav="contact">Contact</a></li>
+      </ul>
+      <button
+        class="hamburger"
+        type="button"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </nav>
+    <slot />
+    <footer id="contact">
+      <div class="container footer-content">
+        <p class="section-eyebrow">06 — Contact</p>
+        <h2 class="section-title">Parlons de votre prochain projet.</h2>
+        <p class="footer-intro">
+          Un projet, une question ou simplement l'envie d'échanger ? Je réponds sous 48 heures.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:marceltko@gmail.com" class="contact-btn">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i> marceltko@gmail.com
+          </a>
+          <a href="tel:+22897554217" class="contact-btn">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i> +228 97 55 42 17
+          </a>
+          <a
+            href="https://github.com/hxriell"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-btn"
+          >
+            <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </div>
+        <div class="location">
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i> Lomé, Togo
+        </div>
+        <div class="copyright">
+          &copy; 2026 TEKO Folly Hariel Marcel. Conçu et développé avec
+          <i class="fa-solid fa-heart" aria-hidden="true"></i>.
+        </div>
+      </div>
+    </footer>
+    <script>
+      import { mountNav } from '../components/nav.js';
+      document.addEventListener('astro:page-load', mountNav);
+      document.addEventListener('astro:before-swap', () => {
+        document.body.classList.remove('menu-open');
+        document.querySelector('.nav-links')?.classList.remove('open');
+      });
+    </script>
+  </body>
+</html>

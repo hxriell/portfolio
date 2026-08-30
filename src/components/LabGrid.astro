@@ -1,0 +1,356 @@
+---
+const ideDefault = `<h1>Hello World</h1>
+<button>Click Me</button>
+<style>h1 { color: #00e5f0; }</style>`;
+const jsonPlaceholder = '{"nom": "Test", "valeur": 123}';
+---
+<!-- Featured modules -->
+            <h3 class="lab-subtitle">Modules phares</h3>
+            <div class="lab-featured">
+
+                <!-- Featured 1: Web IDE -->
+                <div class="lab-module large-module" id="lab-ide">
+                    <div class="module-header">
+                        <i class="fa-solid fa-code" aria-hidden="true"></i>
+                        <h3>Éditeur de code en direct</h3>
+                    </div>
+                    <div class="ide-container">
+                        <div class="ide-editor">
+                            <div class="line-numbers">1<br>2<br>3<br>4</div>
+                            <textarea id="code-input" spellcheck="false" aria-label="Éditeur HTML et CSS">{ideDefault}</textarea>
+                        </div>
+                        <div class="ide-preview" id="code-preview"></div>
+                    </div>
+                    <p class="module-desc">Éditeur HTML/CSS avec aperçu instantané.</p>
+                    <p class="module-proof">Ce que cette démo prouve : je maîtrise le rendu HTML/CSS en temps réel et la
+                        synchronisation d'une interface avec la saisie utilisateur.</p>
+                </div>
+
+                <!-- Featured 2: Neural Network -->
+                <div class="lab-module" id="lab-neural">
+                    <div class="module-header">
+                        <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                        <h3>Réseau neuronal</h3>
+                    </div>
+                    <div class="module-display">
+                        <canvas id="neural-canvas" aria-hidden="true"></canvas>
+                    </div>
+                    <div class="module-controls">
+                        <button type="button" onclick="trainNetwork()">Entraîner</button>
+                    </div>
+                    <p class="module-desc">Visualisation de la propagation du signal entre couches.</p>
+                    <p class="module-proof">Ce que cette démo prouve : je sais représenter visuellement une
+                        architecture de réseau de neurones et animer sa propagation.</p>
+                </div>
+
+                <!-- Featured 3: Cryptographie -->
+                <div class="lab-module" id="lab-crypto">
+                    <div class="module-header">
+                        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                        <h3>Cryptographie</h3>
+                    </div>
+                    <div class="crypto-container">
+                        <textarea id="crypto-input" placeholder="Tapez votre message..."
+                            aria-label="Message à chiffrer"></textarea>
+                        <div class="crypto-output" id="crypto-output">Message chiffré affiché ici...</div>
+                    </div>
+                    <div class="module-controls">
+                        <button type="button" data-cipher="caesar" onclick="setCipher('caesar', event)"
+                            class="active-cipher">César</button>
+                        <button type="button" data-cipher="base64" onclick="setCipher('base64', event)">Base64</button>
+                        <button type="button" data-cipher="rot13" onclick="setCipher('rot13', event)">ROT13</button>
+                    </div>
+                    <p class="module-desc">Chiffrement en temps réel avec trois algorithmes.</p>
+                    <p class="module-proof">Ce que cette démo prouve : je manipule les chaînes de caractères et
+                        j'implémente des algorithmes de chiffrement classiques sans dépendance externe.</p>
+                </div>
+
+                <!-- Featured 4: Tic-Tac-Toe -->
+                <div class="lab-module" id="lab-tictactoe">
+                    <div class="module-header">
+                        <i class="fa-solid fa-brain" aria-hidden="true"></i>
+                        <h3>IA Morpion</h3>
+                    </div>
+                    <div class="tictactoe-board" id="ttt-board">
+                        <div class="ttt-cell" data-index="0"></div>
+                        <div class="ttt-cell" data-index="1"></div>
+                        <div class="ttt-cell" data-index="2"></div>
+                        <div class="ttt-cell" data-index="3"></div>
+                        <div class="ttt-cell" data-index="4"></div>
+                        <div class="ttt-cell" data-index="5"></div>
+                        <div class="ttt-cell" data-index="6"></div>
+                        <div class="ttt-cell" data-index="7"></div>
+                        <div class="ttt-cell" data-index="8"></div>
+                    </div>
+                    <div class="ttt-status" id="ttt-status">Votre tour (X)</div>
+                    <div class="module-controls">
+                        <button type="button" onclick="resetTicTacToe()">Nouvelle partie</button>
+                    </div>
+                    <p class="module-desc">IA imbattable basée sur l'algorithme Minimax.</p>
+                    <p class="module-proof">Ce que cette démo prouve : je conçois et j'implémente un algorithme de
+                        décision récursif jusqu'au résultat optimal.</p>
+                </div>
+
+                <!-- Featured 5: Algo Visualizer -->
+                <div class="lab-module large-module" id="lab-algo">
+                    <div class="module-header">
+                        <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
+                        <h3>Visualiseur d'algorithmes</h3>
+                    </div>
+                    <div class="module-display">
+                        <canvas id="algo-canvas" aria-hidden="true"></canvas>
+                    </div>
+                    <div class="module-controls">
+                        <button type="button" onclick="startBubbleSort()">Tri à bulles</button>
+                        <button type="button" onclick="startQuickSort()">Tri rapide</button>
+                        <button type="button" onclick="resetAlgo()">Réinitialiser</button>
+                    </div>
+                    <p class="module-desc">Comparaison visuelle de deux algorithmes de tri.</p>
+                    <p class="module-proof">Ce que cette démo prouve : je comprends la complexité algorithmique et je
+                        sais la rendre lisible par une animation pas à pas.</p>
+                </div>
+
+            </div>
+
+            <!-- Tabbed modules -->
+            <h3 class="lab-subtitle">Explorer par domaine</h3>
+            <div class="lab-tabs">
+                <div class="lab-tablist" role="tablist" aria-label="Domaines de compétences">
+                    <button type="button" class="lab-tab" id="lab-tab-web" role="tab" aria-selected="true"
+                        aria-controls="lab-panel-web" tabindex="0">Web</button>
+                    <button type="button" class="lab-tab" id="lab-tab-data" role="tab" aria-selected="false"
+                        aria-controls="lab-panel-data" tabindex="-1">Data / IA</button>
+                    <button type="button" class="lab-tab" id="lab-tab-design" role="tab" aria-selected="false"
+                        aria-controls="lab-panel-design" tabindex="-1">Design</button>
+                    <button type="button" class="lab-tab" id="lab-tab-security" role="tab" aria-selected="false"
+                        aria-controls="lab-panel-security" tabindex="-1">Sécurité</button>
+                </div>
+
+                <!-- Panel: Web -->
+                <div class="lab-panel" id="lab-panel-web" role="tabpanel" aria-labelledby="lab-tab-web" tabindex="0">
+                    <div class="lab-grid">
+
+                        <div class="lab-module" id="lab-web">
+                            <div class="module-header">
+                                <i class="fa-solid fa-code" aria-hidden="true"></i>
+                                <h3>Web dynamique</h3>
+                            </div>
+                            <div class="module-display">
+                                <div id="dynamic-box">Cliquez-moi !</div>
+                            </div>
+                            <div class="module-controls">
+                                <button type="button" onclick="changeColor()">Couleur</button>
+                                <button type="button" onclick="changeShape()">Forme</button>
+                                <button type="button" onclick="pulseAnim()">Pulsation</button>
+                                <button type="button" onclick="spinAnim()">Rotation</button>
+                                <button type="button" onclick="shakeAnim()">Secousse</button>
+                            </div>
+                            <p class="module-desc">Manipulation du DOM et animations en temps réel.</p>
+                            <p class="module-proof">Ce que cette démo prouve : je pilote le DOM et l'API Web Animations
+                                pour créer des interactions fluides.</p>
+                        </div>
+
+                        <div class="lab-module" id="lab-json">
+                            <div class="module-header">
+                                <i class="fa-solid fa-file-code" aria-hidden="true"></i>
+                                <h3>Formateur JSON</h3>
+                            </div>
+                            <div class="json-container">
+                                <textarea id="json-input" placeholder={jsonPlaceholder}
+                                    aria-label="JSON à formater"></textarea>
+                                <div class="json-output" id="json-output">Le JSON formaté apparaîtra ici...</div>
+                            </div>
+                            <div class="module-controls">
+                                <button type="button" onclick="formatJSON()">Formater</button>
+                                <button type="button" onclick="validateJSON()">Valider</button>
+                            </div>
+                            <p class="module-desc">Validation et mise en forme JSON instantanées.</p>
+                            <p class="module-proof">Ce que cette démo prouve : je gère le parsing de données
+                                structurées et les erreurs utilisateur proprement.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Panel: Data / IA -->
+                <div class="lab-panel" id="lab-panel-data" role="tabpanel" aria-labelledby="lab-tab-data" tabindex="0"
+                    hidden>
+                    <div class="lab-grid">
+
+                        <div class="lab-module" id="lab-data-simple">
+                            <div class="module-header">
+                                <i class="fa-solid fa-chart-bar" aria-hidden="true"></i>
+                                <h3>Data simple</h3>
+                            </div>
+                            <div class="module-display graph-container">
+                                <div class="bar" style="height: 30%;"><span>30%</span></div>
+                                <div class="bar" style="height: 50%;"><span>50%</span></div>
+                                <div class="bar" style="height: 80%;"><span>80%</span></div>
+                                <div class="bar" style="height: 60%;"><span>60%</span></div>
+                            </div>
+                            <div class="module-controls">
+                                <button type="button" onclick="randomizeData()">Générer</button>
+                            </div>
+                            <p class="module-desc">Visualisation de données en CSS pur.</p>
+                            <p class="module-proof">Ce que cette démo prouve : je traduis des valeurs brutes en
+                                représentation graphique lisible.</p>
+                        </div>
+
+                        <div class="lab-module" id="lab-data-ai">
+                            <div class="module-header">
+                                <i class="fa-solid fa-chart-area" aria-hidden="true"></i>
+                                <h3>Analyse de marché simulée</h3>
+                            </div>
+                            <div class="module-display">
+                                <canvas id="market-canvas" aria-hidden="true"></canvas>
+                                <div class="data-overlay">
+                                    <span id="market-value">Indice : 45 230</span>
+                                    <span id="market-trend" class="trending-up">+2,4 %</span>
+                                </div>
+                            </div>
+                            <p class="module-desc">Simulation de série temporelle et de tendance.</p>
+                            <p class="module-proof">Ce que cette démo prouve : je génère, je mets à l'échelle et je
+                                trace un flux de données continu sur canvas.</p>
+                        </div>
+
+                        <div class="lab-module" id="lab-weather">
+                            <div class="module-header">
+                                <i class="fa-solid fa-cloud-sun" aria-hidden="true"></i>
+                                <h3>Tableau météo</h3>
+                            </div>
+                            <div class="weather-display" id="weather-display">
+                                <div class="weather-icon">🌤️</div>
+                                <div class="weather-temp">25°C</div>
+                                <div class="weather-city">Paris</div>
+                                <div class="weather-desc">Partiellement nuageux</div>
+                            </div>
+                            <div class="module-controls">
+                                <input type="text" id="city-input" placeholder="Ville..." aria-label="Nom de la ville">
+                                <button type="button" onclick="searchWeather()">Rechercher</button>
+                            </div>
+                            <p class="module-desc">Interface de consultation météo (données simulées).</p>
+                            <p class="module-proof">Ce que cette démo prouve : je structure une interface de recherche
+                                et j'affiche un jeu de données conditionnel.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Panel: Design -->
+                <div class="lab-panel" id="lab-panel-design" role="tabpanel" aria-labelledby="lab-tab-design"
+                    tabindex="0" hidden>
+                    <div class="lab-grid">
+
+                        <div class="lab-module" id="lab-design">
+                            <div class="module-header">
+                                <i class="fa-solid fa-cube" aria-hidden="true"></i>
+                                <h3>Design &amp; 3D</h3>
+                            </div>
+                            <div class="module-display scene-3d">
+                                <div class="cube">
+                                    <div class="face front">UI</div>
+                                    <div class="face back">UX</div>
+                                    <div class="face right">3D</div>
+                                    <div class="face left">Art</div>
+                                    <div class="face top">Tech</div>
+                                    <div class="face bottom">Dev</div>
+                                </div>
+                            </div>
+                            <div class="module-controls">
+                                <p class="module-desc">Survolez pour faire tourner le cube.</p>
+                            </div>
+                            <p class="module-desc">Rendu 3D en CSS pur avec perspective.</p>
+                            <p class="module-proof">Ce que cette démo prouve : je maîtrise les transformations 3D CSS
+                                et la réponse au mouvement du curseur.</p>
+                        </div>
+
+                        <div class="lab-module" id="lab-music">
+                            <div class="module-header">
+                                <i class="fa-solid fa-wave-square" aria-hidden="true"></i>
+                                <h3>Visualiseur audio</h3>
+                            </div>
+                            <div class="module-display">
+                                <canvas id="music-canvas" aria-hidden="true"></canvas>
+                            </div>
+                            <div class="module-controls">
+                                <input type="file" id="audio-file" accept="audio/*" class="visually-hidden"
+                                    aria-label="Charger un fichier audio">
+                                <button type="button"
+                                    onclick="document.getElementById('audio-file').click()">Charger un
+                                    fichier</button>
+                                <button type="button" onclick="toggleMusicPlay()" id="play-btn">Lecture</button>
+                            </div>
+                            <audio id="audio-player" class="visually-hidden"></audio>
+                            <p class="module-desc">Analyse spectrale en direct via la Web Audio API.</p>
+                            <p class="module-proof">Ce que cette démo prouve : je relie une source audio à une
+                                visualisation temps réel image par image.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Panel: Sécurité -->
+                <div class="lab-panel" id="lab-panel-security" role="tabpanel" aria-labelledby="lab-tab-security"
+                    tabindex="0" hidden>
+                    <div class="lab-grid">
+
+                        <div class="lab-module large-module" id="lab-cyber-2">
+                            <div class="module-header">
+                                <i class="fa-solid fa-terminal" aria-hidden="true"></i>
+                                <h3>Terminal système</h3>
+                            </div>
+                            <div class="terminal-interface" id="cyber-terminal">
+                                <div id="term-output">
+                                    <div>Bienvenue sur TEKO-OS v2.4.5</div>
+                                    <div>Tapez « help » pour afficher les commandes.</div>
+                                </div>
+                                <div class="term-input-line">
+                                    <span class="prompt">root@teko:~$</span>
+                                    <input type="text" id="term-input" autocomplete="off"
+                                        aria-label="Commande à exécuter">
+                                </div>
+                            </div>
+                            <p class="module-desc">Interface en ligne de commande interactive.</p>
+                            <p class="module-proof">Ce que cette démo prouve : je construis un interpréteur de
+                                commandes et je gère la saisie clavier et l'historique d'affichage.</p>
+                        </div>
+
+                        <div class="lab-module" id="lab-physics">
+                            <div class="module-header">
+                                <i class="fa-solid fa-atom" aria-hidden="true"></i>
+                                <h3>Moteur physique</h3>
+                            </div>
+                            <div class="module-display">
+                                <canvas id="physics-canvas" aria-hidden="true"></canvas>
+                            </div>
+                            <div class="module-controls">
+                                <button type="button" onclick="toggleGravity()">Gravité</button>
+                                <button type="button" onclick="addBody()">+ Corps</button>
+                            </div>
+                            <p class="module-desc">Gravité et rebonds. Cliquez dans la zone pour ajouter un corps.</p>
+                            <p class="module-proof">Ce que cette démo prouve : je transpose des équations physiques en
+                                simulation stable à soixante images par seconde.</p>
+                        </div>
+
+                        <div class="lab-module" id="lab-game">
+                            <div class="module-header">
+                                <i class="fa-solid fa-gamepad" aria-hidden="true"></i>
+                                <h3>Prototype de jeu</h3>
+                            </div>
+                            <div class="module-display game-screen">
+                                <canvas id="game-canvas" aria-hidden="true"></canvas>
+                                <div id="game-ui" class="start-screen">
+                                    <p class="game-instructions">Flèches pour se déplacer <br> Espace pour tirer</p>
+                                    <button type="button" onclick="startGame()">Jouer</button>
+                                </div>
+                            </div>
+                            <p class="module-desc">Mini-jeu « Space Defender » en JavaScript et canvas.</p>
+                            <p class="module-proof">Ce que cette démo prouve : je gère une boucle de jeu complète —
+                                entrées, collisions, score et états.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

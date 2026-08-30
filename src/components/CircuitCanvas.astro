@@ -1,0 +1,7 @@
+<canvas id="particles-js" aria-hidden="true"></canvas>
+<script>
+  import { mountCircuit, unmountCircuit } from './circuit.js';
+
+  document.addEventListener('astro:page-load', mountCircuit);
+  document.addEventListener('astro:before-swap', unmountCircuit);
+</script>
